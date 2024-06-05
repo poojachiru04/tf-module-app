@@ -23,7 +23,7 @@ resource "aws_security_group" "main" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-
+}
 
 resource "aws_instance" "main" {
   ami                    = data.aws_ami.ami.image_id
@@ -33,6 +33,7 @@ resource "aws_instance" "main" {
   tags = {
     Name      = "${var.name}-${var.env}"
   }
+}
 
 
 resource "aws_route53_record" "main" {
