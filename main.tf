@@ -7,7 +7,6 @@ resource "aws_security_group" "main" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "SSH Port"
   }
 
   ingress {
@@ -15,7 +14,6 @@ resource "aws_security_group" "main" {
     to_port     = var.port_no
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description =
   }
 
   egress {
@@ -34,14 +32,11 @@ resource "aws_instance" "main" {
 
   tags = {
     Name      = "${var.name}-${var.env}"
-    Monitor   = "yes"
-    env       = var.env
-    component = var.name
   }
 
 
 resource "aws_route53_record" "main" {
-  zone_id = var.zone_id
+  zone_id = data.aws_route53_zone.main.zone_id
   name    = "${var.name}-${var.env}.poodevops.online"
   type    = "A"
   ttl     = 30
