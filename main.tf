@@ -54,8 +54,8 @@ resource "null_resource" "main" {
     type     = "ssh"
   }
 
-  provisioner "remote-exec" {
-    inline = [
+   provisioner "remote-exec" {
+    inline   = [
        "ansible-pull -i localhost, -U https://github.com/poojachiru04/expense-ansible -e role_name=${var.name} -e env=${var.env} expense.yml"
     ]
   }
