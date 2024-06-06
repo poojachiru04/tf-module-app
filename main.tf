@@ -55,7 +55,7 @@ resource "null_resource" "main" {
   }
 
    provisioner "remote-exec" {
-    inline   = [
+     inline = [
        "ansible-pull -i localhost, -U https://github.com/poojachiru04/expense-ansible -e role_name=${var.name} -e env=${var.env} expense.yml"
     ]
   }
