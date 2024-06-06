@@ -1,4 +1,4 @@
 variable "instance_type" {}
 variable "name" {}
 variable "env" {}
-variable "port" {}
+variable "port_no" {}
