@@ -50,13 +50,13 @@ resource "null_resource" "main" {
   connection {
     host     = aws_instance.main.private_ip
     user     = "ec2-user"
-    password = "DevOps321"
+    password = var.SSH_PASSWORD
     type     = "ssh"
   }
 
    provisioner "remote-exec" {
      inline = [
-       "ansible-pull -i localhost, -U https://github.com/poojachiru04/expense-ansible -e role_name=${var.name} -e env=${var.env} expense.yml"
+       "ansible-pull -i localhost, -U https://github.com/poojachiru04/expense-ansible -e role_name=${var.name} -e env=${var.env} -e vault_token=${var.vault_token} expense.yml"
     ]
   }
 }
