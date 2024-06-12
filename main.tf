@@ -63,6 +63,10 @@ resource "aws_route53_record" "main" {
 resource "null_resource" "main" {
   depends_on = [aws_route53_record.main]
 
+  triggers = {
+    instance_id = aws_instance.main.id
+  }
+
   connection {
     host     = aws_instance.main.private_ip
     user     = "ec2-user"
