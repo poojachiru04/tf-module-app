@@ -43,14 +43,7 @@ resource "aws_instance" "main" {
   tags = {
     Name      = "${var.name}-${var.env}"
   }
-
-  lifecycle {
-    ignore_changes = [
-      "ami"
-    ]
-  }
 }
-
 
 resource "aws_route53_record" "main" {
   zone_id = var.zone_id
