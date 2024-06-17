@@ -46,6 +46,17 @@ resource "aws_security_group_rule" "nginx-exporter-port" {
 
 }
 
+resource "aws_security_group_rule" "grok-exporter-port" {
+  count             = var.name == "frontend" ? 1 : 0
+  type              = "ingress"
+  from_port         = 9144
+  to_port           = 9144
+  protocol          = "tcp"
+  cidr_blocks       = var.prometheus_server
+  security_group_id = aws_security_group.main.id
+
+}
+
 resource "aws_instance" "main" {
   ami                    = data.aws_ami.ami.image_id
   instance_type          = var.instance_type
