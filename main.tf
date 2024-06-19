@@ -62,6 +62,10 @@ resource "aws_instance" "main" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.main.id]
 
+  root_block_device {
+    volume_size = var.disk_size
+  }
+
   tags = {
     Name      = "${var.name}-${var.env}"
     monitor   = "yes"
