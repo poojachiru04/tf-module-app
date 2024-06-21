@@ -43,7 +43,6 @@ resource "aws_security_group_rule" "nginx-exporter-port" {
   protocol          = "tcp"
   cidr_blocks       = var.prometheus_server
   security_group_id = aws_security_group.main.id
-
 }
 
 resource "aws_security_group_rule" "grok-exporter-port" {
@@ -54,7 +53,6 @@ resource "aws_security_group_rule" "grok-exporter-port" {
   protocol          = "tcp"
   cidr_blocks       = var.prometheus_server
   security_group_id = aws_security_group.main.id
-
 }
 
 resource "aws_instance" "main" {
@@ -72,6 +70,13 @@ resource "aws_instance" "main" {
     env       = var.env
     component = var.name
   }
+
+  lifecycle {
+    ignore_changes = [
+       "ami"
+    ]
+  }
+
 }
 
 resource "aws_route53_record" "main" {
